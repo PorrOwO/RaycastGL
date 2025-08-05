@@ -31,6 +31,8 @@ struct Player {
 
 // FUNCTION PROTOTYPES
 void frame_buffer_size_callback(GLFWwindow*, int, int);
+void processInput(GLFWwindow*);
+
 
 int main(int arc, char* argv[]) {
   Map map;
@@ -58,6 +60,14 @@ int main(int arc, char* argv[]) {
 
   //render loop
   while(!glfwWindowShouldClose(window)){
+    //input processing
+    processInput(window);
+  
+    //rendering
+    glClearColor(0.1f, 0.2f, 0.6f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    //check events and swap buffers
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
@@ -73,4 +83,11 @@ int main(int arc, char* argv[]) {
 //callback to adjust viewport on window resize
 void frame_buffer_size_callback(GLFWwindow* win, int width, int height){
   glViewport(0, 0, width, height);
+}
+
+
+void processInput(GLFWwindow* win){
+  if(glfwGetKey(win, GLFW_KEY_ESCAPE) == GLFW_PRESS){
+    glfwSetWindowShouldClose(win, true);
+  }
 }
