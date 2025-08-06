@@ -9,5 +9,5 @@ find_package(OpenGL REQUIRED)
 add_library(glad STATIC lib/glad/glad.c)
 target_include_directories(glad PUBLIC lib/glad/include)
 
-add_executable(raycastGL src/main.cpp)
+add_executable(raycastGL src/main.cpp src/shader.cpp)
 target_link_libraries(raycastGL PRIVATE glfw OpenGL::GL glad)
